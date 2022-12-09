@@ -43,7 +43,7 @@ table {
 }
 
 body {
-    background-color: beige;
+    background-color: whitesmoke;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -69,9 +69,9 @@ gap: 40px;
 }
 
 button {
-    border: none;
-    background-color: beige;
+    background-color: whitesmoke;
     font-size: 50px;
+    box-shadow: 2px 2px gray;
 }
 
 button:hover {
