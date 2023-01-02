@@ -2,7 +2,9 @@ const player = () => {};
 
 (function () {
   let gameBoard = {
-    board: ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
+    board: ["", "", "", "", "", "", "", "", ""],
+    // board: ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
+    turnCounter: 1,
     init: function () {
       this.cacheDom();
       this.bindEvents();
@@ -32,12 +34,17 @@ const player = () => {};
     },
 
     markBox: function (e) {
-      // this.gridItem[i].textContent = "X";
       let mark = e.currentTarget.dataset.index;
-      this.board[mark] = "X";
+
+      if (this.board[mark] !== "") {
+        return;
+      } else if (!(this.turnCounter % 2 === 0)) {
+        this.board[mark] = "X";
+      } else if (this.turnCounter % 2 === 0) {
+        this.board[mark] = "O";
+      }
       this.render();
     },
-    displayController: function () {},
   };
 
   gameBoard.init();
