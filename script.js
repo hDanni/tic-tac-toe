@@ -3,7 +3,16 @@ const player = () => {};
 (function () {
   let gameBoard = {
     board: ["", "", "", "", "", "", "", "", ""],
-    // board: ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
+    // board: [
+    //   ["", "", ""],
+    //   ["", "", ""],
+    //   ["", "", ""],
+    // ],
+    // board: [
+    //   ["0", "1", "2"],
+    //   ["3", "4", "5"],
+    //   ["6", "7", "8"],
+    // ],
     turnCounter: 1,
     init: function () {
       this.cacheDom();
@@ -19,11 +28,16 @@ const player = () => {};
     },
     // handles the board display //
     render: function () {
-      let data = {
-        board: this.board,
-      };
-      for (i = 0; i < data.board.length; i++) {
-        this.gridItem[i].textContent = data.board[i];
+      // let data = {
+      //   board: this.board,
+      // };
+      // for (let i = 0; i < data.board.length; i++) {
+      //   for (let j = 0; j < data.board[i].length; j++) {
+      //     this.gridItem[this.gridCounter].textContent = data.board[i][j];
+      //   }
+      // }
+      for (let i = 0; i < this.board.length; i++) {
+        this.gridItem[i].textContent = this.board[i];
       }
     },
     // handles DOM events //
@@ -43,7 +57,37 @@ const player = () => {};
       } else if (this.turnCounter % 2 === 0) {
         this.board[mark] = "O";
       }
+      this.turnCounter++;
       this.render();
+      this.winCondition();
+    },
+    winCondition: function () {
+      const checkIndices = [
+        [0, 1, 2],
+        [0, 3, 6],
+        [0, 4, 8],
+        [0, 4, 8],
+        [1, 4, 7],
+        [2, 5, 8],
+        [3, 4, 5],
+        [6, 7, 8],
+      ];
+
+      checkIndices.forEach((index) => {
+        let a = index[0];
+        let b = index[1];
+        let c = index[2];
+
+        if (
+          this.board[a] != "" &&
+          this.board[a] == this.board[b] &&
+          this.board[b] == this.board[c]
+        ) {
+          console.log("Player Wins");
+        } else {
+          console.log("Tie Game");
+        }
+      });
     },
   };
 
